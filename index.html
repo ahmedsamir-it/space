@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,161 +7,250 @@
 
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-* { box-sizing: border-box; margin:0; padding:0; }
-body { font-family: 'Cairo', sans-serif; color: #f0f4f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; background: radial-gradient(circle at top left, #1e3c72, #2a5298, #1a2a47); position: relative; transition: all 0.3s ease; }
+body {
+  font-family:'Cairo',sans-serif; margin:0; padding:0;
+  min-height:100vh; display:flex; justify-content:center; align-items:center;
+  overflow-x:hidden; color:#fff; position:relative; transition: background 0.6s ease;
+  background: linear-gradient(135deg,#1e3c72,#2a5298);
+}
 
-/* النجوم المتحركة */
-body::before { content: ''; position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 50px 50px; animation: moveStars 60s linear infinite; z-index: 0; opacity: 0.25; }
-@keyframes moveStars { 0% { transform: translate(0,0); } 100% { transform: translate(-100px,-100px); } }
+/* لوجو خلفية ثابت */
+body::after {
+  content:'';
+  position:absolute; top:50%; left:50%;
+  width:500px; height:500px;
+  transform:translate(-50%,-50%);
+  background-image: url('https://i.postimg.cc/FzzgM4GR/Screenshot-2024-09-12-215154-removebg-preview.png');
+  background-size:contain; background-repeat:no-repeat; background-position:center;
+  opacity:0.06; z-index:0; filter:drop-shadow(0 0 20px rgba(255,255,255,0.4));
+  animation: glowWatermark 6s ease-in-out infinite;
+}
+@keyframes glowWatermark {
+  0%,100%{opacity:0.06; filter:drop-shadow(0 0 10px rgba(255,255,255,0.2));}
+  50%{opacity:0.12; filter:drop-shadow(0 0 25px rgba(255,255,255,0.5));}
+}
 
-/* Watermark للشعار */
-body::after { content: ''; position: absolute; width: 500px; height: 500px; top: 50%; left: 50%; transform: translate(-50%, -50%); background-image: url('https://i.postimg.cc/FzzgM4GR/Screenshot-2024-09-12-215154-removebg-preview.png'); background-size: contain; background-repeat: no-repeat; background-position: center; opacity: 0.06; z-index: 0; filter: drop-shadow(0 0 20px rgba(255,255,255,0.4)); animation: glowWatermark 6s ease-in-out infinite; }
-@keyframes glowWatermark { 0%,100{opacity:0.06; filter:drop-shadow(0 0 10px rgba(255,255,255,0.2));} 50%{opacity:0.12; filter:drop-shadow(0 0 25px rgba(255,255,255,0.5));} }
+.container {
+  width:95%; max-width:950px; background: rgba(255,255,255,0.15);
+  border-radius:20px; padding:40px 30px; backdrop-filter: blur(12px);
+  box-shadow:0 10px 40px rgba(0,0,0,0.25); position:relative; z-index:1;
+  transition: all 0.6s ease;
+}
 
-/* الإطار الزجاجي */
-.container { width: 90%; max-width: 800px; background: rgba(255,255,255,0.15); border-radius: 20px; padding: 30px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.25); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; flex-direction: column; justify-content: space-between; position: relative; z-index: 1; animation: fadeInUp 0.8s ease; }
-@keyframes fadeInUp { from{transform:translateY(40px);opacity:0;} to{transform:translateY(0);opacity:1;} }
+.header {
+  display:flex; justify-content:center; align-items:center; gap:20px; margin-bottom:30px; flex-wrap:wrap;
+}
 
-.header { display: flex; align-items: center; justify-content: flex-start; text-align: left; margin-bottom: 25px; gap: 20px; flex-wrap: wrap; }
-.logo { width: 120px; max-width: 25%; transition: transform 0.4s ease; }
-.logo:hover { transform: scale(1.1) rotate(2deg); }
-.title-container { display:flex; flex-direction: column; justify-content: center; }
-h1 { font-size: clamp(1.8rem,4vw,2.5rem); font-weight:700; color:#fff; text-shadow:2px 2px 6px rgba(0,0,0,0.4); margin-bottom:5px; opacity:0; transform: scale(0.8) translateY(-20px); animation:h1Entrance 1s forwards; }
-@keyframes h1Entrance { 0%{opacity:0; transform:scale(0.8) translateY(-20px);} 50%{opacity:0.8; transform:scale(1.05) translateY(0); text-shadow:0 0 20px #00bfff;} 100%{opacity:1; transform:scale(1) translateY(0); text-shadow:2px 2px 6px rgba(0,0,0,0.4);} }
-h2 { font-size: clamp(1rem,2.5vw,1.2rem); color:#dce6f7; font-weight:500; animation: fadeText 1.2s ease-in-out; margin:0; }
-@keyframes fadeText { from{opacity:0; transform:translateY(-10px);} to{opacity:1; transform:translateY(0);} }
+.logo-big {
+  width:120px; height:120px; border-radius:50%; overflow:hidden;
+  box-shadow:0 6px 20px rgba(0,0,0,0.4); transition: transform 0.5s, box-shadow 0.4s;
+}
+.logo-big img { width:100%; height:100%; object-fit:cover; }
+.logo-big:hover { transform: scale(1.2) rotate(10deg); box-shadow:0 12px 30px rgba(0,0,0,0.5); }
 
-.form-label{color:#fff;font-weight:600;}
-textarea.form-control{border-radius:12px;border:none;resize:none;box-shadow:0 2px 8px rgba(0,0,0,0.15);transition:all 0.3s ease;font-size:1rem;}
-textarea.form-control:focus{box-shadow:0 0 15px #00bfff;border:2px solid #00bfff;}
+.title-container { display:flex; flex-direction:column; justify-content:center; text-align:center; }
+.title-container h1 { font-size:2rem; font-weight:700; margin:0; color:#fff; text-shadow:2px 2px 6px rgba(0,0,0,0.4); }
+.title-container h2 { font-size:1.2rem; font-weight:500; margin:0; color:#dce6f7; text-shadow:1px 1px 4px rgba(0,0,0,0.3); }
 
-.result-box{border-radius:12px;padding:15px;min-height:150px;max-height:45vh;overflow-y:auto;background:#fff;color:#333;box-shadow:0 4px 14px rgba(0,0,0,0.2);margin-top:20px;transition:all 0.3s ease;}
-.result-line{animation:slideIn 0.3s ease;padding:6px 10px;border-bottom:1px solid #e1e1e1;border-radius:5px;transition:all 0.3s ease;}
-.result-line:hover{background:rgba(0,191,255,0.1);box-shadow:0 2px 10px rgba(0,191,255,0.25);transform:scale(1.02);}
-@keyframes slideIn{from{transform:translateX(-20px);opacity:0;} to{transform:translateX(0);opacity:1;}}
-
-.buttons{margin-top:25px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
-.btn{flex:1;font-weight:600;border-radius:10px;padding:12px;transition:all 0.3s ease;font-size:1rem;position:relative;}
-.btn i{margin-left:5px;}
-.btn-primary{background-color:#007bff;border:none;}
-.btn-danger{background-color:#dc3545;border:none;}
-.btn-success{background-color:#28a745;border:none;}
-.btn:hover{transform:translateY(-3px) scale(1.03); box-shadow:0 6px 20px rgba(0,0,0,0.25),0 0 15px rgba(255,255,255,0.3);}
-.btn:active{transform:scale(0.97);}
-
-.language-btn{position:absolute;top:15px;right:15px; z-index:2; border-radius:12px; font-weight:600; padding:8px 12px; background:rgba(0,0,0,0.25); color:#fff; border:none; cursor:pointer; transition:all 0.3s ease;}
+.language-btn{ position:absolute; top:15px; right:15px; z-index:10; padding:8px 14px; border:none; border-radius:12px;
+  background:rgba(0,0,0,0.25); color:#fff; font-weight:600; cursor:pointer; transition:all 0.3s ease; }
 .language-btn:hover{background:rgba(0,0,0,0.5);}
 
-@media(max-width:768px){.header{justify-content:center; text-align:center;}} 
-@media(max-width:576px){.buttons{flex-direction:column;}.btn{flex:100%;}.header{flex-direction:column;align-items:center;}}
+/* Tabs */
+.nav-tabs .nav-link{ display:flex; align-items:center; gap:5px; font-weight:600; transition:all 0.3s; border-radius:10px; }
+.nav-tabs .nav-link.active{ box-shadow:0 4px 15px rgba(0,0,0,0.25); }
+.tab-pane{animation: fadeTab 0.5s ease-in-out; padding:20px; border-radius:15px; transition:all 0.6s ease; color:#000; }
+
+/* ألوان تبويبات مختلفة */
+#tabExcel{ background: linear-gradient(135deg,#4facfe,#00f2fe); }
+#tabProcess{ background: linear-gradient(135deg,#43e97b,#38f9d7); }
+
+/* عناصر داخل التبويب */
+textarea.form-control{ border-radius:12px; resize:none; font-size:1rem; padding:12px; background: rgba(255,255,255,0.9); color:#000; backdrop-filter: blur(8px); border:none; transition:all 0.3s; }
+textarea.form-control:focus{ box-shadow:0 0 15px #00bfff; border:2px solid #00bfff; }
+
+.result-box{ border-radius:12px; padding:15px; min-height:150px; max-height:45vh; overflow-y:auto; background:#fff; color:#333; margin-top:15px; box-shadow:0 4px 14px rgba(0,0,0,0.25); }
+.result-line{ padding:6px 10px; border-bottom:1px solid #e1e1e1; border-radius:5px; margin-bottom:5px; }
+.result-line:hover{ background:rgba(0,191,255,0.1); transform:scale(1.02); }
+
+button.btn{ margin-top:10px; border-radius:10px; transition:all 0.3s ease; }
+button.btn:hover{ transform:translateY(-3px) scale(1.03); box-shadow:0 6px 20px rgba(0,0,0,0.25),0 0 15px rgba(255,255,255,0.3); }
 </style>
 </head>
-<body dir="rtl">
+<body>
 
 <button class="language-btn" id="langBtn">English</button>
 
 <div class="container">
   <div class="header">
-    <img src="https://i.postimg.cc/FzzgM4GR/Screenshot-2024-09-12-215154-removebg-preview.png" alt="Logo" class="logo" id="logo">
+    <div class="logo-big"><img id="mainLogo" src="https://i.postimg.cc/FzzgM4GR/Screenshot-2024-09-12-215154-removebg-preview.png"></div>
     <div class="title-container">
       <h1 id="mainTitle">On Time Logistics Services</h1>
-      <h2 id="subTitle">إزالة المسافات وإضافة كود الدولة</h2>
+      <h2 id="developerText">Developed by Ahmed Samir</h2>
     </div>
   </div>
 
-  <div class="mb-3">
-    <label for="inputWords" class="form-label" id="inputLabel">أدخل الأرقام أو الكلمات هنا:</label>
-    <textarea id="inputWords" class="form-control" rows="5"></textarea>
-  </div>
+  <!-- Tabs -->
+  <ul class="nav nav-tabs mb-3" id="mainTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="excel-tab" data-bs-toggle="tab" data-bs-target="#tabExcel" type="button">إنشاء مجلدات وملفات Excel</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="process-tab" data-bs-toggle="tab" data-bs-target="#tabProcess" type="button">إزالة المسافات وإضافة كود الدولة</button>
+    </li>
+  </ul>
 
-  <div class="result-box" id="resultBox"></div>
+  <div class="tab-content">
+    <!-- تبويب Excel -->
+    <div class="tab-pane fade show active" id="tabExcel">
+      <p id="creationLabel">اختر نوع الإنشاء:</p>
+      <div class="mb-3">
+        <textarea id="names" class="form-control" rows="5" placeholder="أدخل الأسماء هنا، كل اسم في سطر"></textarea>
+      </div>
+      <div class="mb-3">
+        <label><input type="radio" name="creationType" value="excel" checked> <span id="opt1">Excel مستقل</span></label><br>
+        <label><input type="radio" name="creationType" value="folder"> <span id="opt2">مجلد فقط</span></label><br>
+        <label><input type="radio" name="creationType" value="folderExcel"> <span id="opt3">Excel داخل المجلد</span></label>
+      </div>
+      <button id="createBtn" class="btn btn-primary">إنشاء ملف ZIP</button>
+      <div id="msg" class="mt-2"></div>
+    </div>
 
-  <div class="buttons">
-    <button class="btn btn-primary" id="processBtn"><i class="fa fa-cog"></i> معالجة</button>
-    <button class="btn btn-danger" id="clearBtn"><i class="fa fa-trash"></i> مسح</button>
-    <button class="btn btn-success" id="exportBtn"><i class="fa fa-file-excel"></i> تصدير إلى Excel</button>
+    <!-- تبويب معالجة البيانات -->
+    <div class="tab-pane fade" id="tabProcess">
+      <div class="mb-3">
+        <label for="inputWords" id="inputLabel">أدخل الأرقام أو الكلمات هنا:</label>
+        <textarea id="inputWords" class="form-control" rows="5" placeholder="أدخل الأرقام أو الكلمات هنا"></textarea>
+      </div>
+      <div class="result-box" id="resultBox"></div>
+      <button id="processBtn" class="btn btn-primary">معالجة</button>
+      <button id="clearBtn" class="btn btn-danger">مسح</button>
+      <button id="exportBtn" class="btn btn-success">تصدير إلى Excel</button>
+    </div>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver/dist/FileSaver.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
 <script>
+// اللغة والتبديل
 let isArabic = true;
-
 const translations = {
-  ar: {
-    mainTitle: "On Time Logistics Services",
-    subTitle: "إزالة المسافات وإضافة كود الدولة",
-    inputLabel: "أدخل الأرقام أو الكلمات هنا:",
-    processBtn: "معالجة",
-    clearBtn: "مسح",
-    exportBtn: "تصدير إلى Excel",
-    langBtn: "English",
-    dir: "rtl",
-    logo: "https://i.postimg.cc/FzzgM4GR/Screenshot-2024-09-12-215154-removebg-preview.png"
+  ar:{
+    developerText:"تم التطوير بواسطة Ahmed Samir",
+    mainTitle:"On Time Logistics Services",
+    excelTab:"إنشاء مجلدات وملفات Excel",
+    processTab:"إزالة المسافات وإضافة كود الدولة",
+    creationLabel:"اختر نوع الإنشاء:",
+    inputLabel:"أدخل الأرقام أو الكلمات هنا:",
+    processBtn:"معالجة",
+    clearBtn:"مسح",
+    exportBtn:"تصدير إلى Excel",
+    placeholderNames:"أدخل الأسماء هنا، كل اسم في سطر",
+    placeholderInput:"أدخل الأرقام أو الكلمات هنا",
+    opt1:"Excel مستقل",
+    opt2:"مجلد فقط",
+    opt3:"Excel داخل المجلد",
+    createBtn:"إنشاء ملف ZIP",
+    langBtn:"English"
   },
-  en: {
-    mainTitle: "On Time Logistics Services",
-    subTitle: "Remove spaces and add country code",
-    inputLabel: "Enter numbers or words here:",
-    processBtn: "Process",
-    clearBtn: "Clear",
-    exportBtn: "Export to Excel",
-    langBtn: "العربية",
-    dir: "ltr",
-    logo: "https://i.postimg.cc/FzzgM4GR/Screenshot-2024-09-12-215154-removebg-preview.png" // ضع شعار اللغة الإنجليزية هنا
+  en:{
+    developerText:"Developed by Ahmed Samir",
+    mainTitle:"On Time Logistics Services",
+    excelTab:"Create Folders & Excel Files",
+    processTab:"Remove Spaces & Add Country Code",
+    creationLabel:"Choose creation type:",
+    inputLabel:"Enter numbers or words here:",
+    processBtn:"Process",
+    clearBtn:"Clear",
+    exportBtn:"Export to Excel",
+    placeholderNames:"Enter names here, one per line",
+    placeholderInput:"Enter numbers or words here",
+    opt1:"Excel File",
+    opt2:"Folder Only",
+    opt3:"Excel inside Folder",
+    createBtn:"Create ZIP File",
+    langBtn:"العربية"
   }
 };
 
-document.getElementById('langBtn').addEventListener('click', () => {
-  isArabic = !isArabic;
-  const lang = isArabic ? 'ar' : 'en';
-  
-  document.getElementById('mainTitle').textContent = translations[lang].mainTitle;
-  document.getElementById('subTitle').textContent = translations[lang].subTitle;
-  document.getElementById('inputLabel').textContent = translations[lang].inputLabel;
-  document.getElementById('processBtn').childNodes[1].textContent = ' ' + translations[lang].processBtn;
-  document.getElementById('clearBtn').childNodes[1].textContent = ' ' + translations[lang].clearBtn;
-  document.getElementById('exportBtn').childNodes[1].textContent = ' ' + translations[lang].exportBtn;
-  document.getElementById('langBtn').textContent = translations[lang].langBtn;
-  document.body.setAttribute('dir', translations[lang].dir);
-  document.getElementById('logo').src = translations[lang].logo;
+document.getElementById('langBtn').addEventListener('click',()=>{
+  isArabic=!isArabic;
+  const lang=isArabic?'ar':'en';
+  document.getElementById('developerText').textContent=translations[lang].developerText;
+  document.getElementById('mainTitle').textContent=translations[lang].mainTitle;
+  document.getElementById('excel-tab').textContent=translations[lang].excelTab;
+  document.getElementById('process-tab').textContent=translations[lang].processTab;
+  document.getElementById('creationLabel').textContent=translations[lang].creationLabel;
+  document.getElementById('inputLabel').textContent=translations[lang].inputLabel;
+  document.getElementById('processBtn').textContent=translations[lang].processBtn;
+  document.getElementById('clearBtn').textContent=translations[lang].clearBtn;
+  document.getElementById('exportBtn').textContent=translations[lang].exportBtn;
+  document.getElementById('names').placeholder=translations[lang].placeholderNames;
+  document.getElementById('inputWords').placeholder=translations[lang].placeholderInput;
+  document.getElementById('opt1').textContent=translations[lang].opt1;
+  document.getElementById('opt2').textContent=translations[lang].opt2;
+  document.getElementById('opt3').textContent=translations[lang].opt3;
+  document.getElementById('createBtn').textContent=translations[lang].createBtn;
+  document.getElementById('langBtn').textContent=translations[lang].langBtn;
+  document.body.setAttribute('dir',isArabic?'rtl':'ltr');
 });
 
-function processInput() {
-  const inputWords = document.getElementById('inputWords').value.trim();
-  const resultBox = document.getElementById('resultBox');
-  resultBox.innerHTML = '';
-  if(!inputWords){ alert(isArabic ? 'الرجاء إدخال بيانات لمعالجتها.' : 'Please enter some data to process.'); return; }
-  const lines = inputWords.split('\n').filter(Boolean);
-  lines.forEach(line => {
-    let processed = line.trim().replace(/\s+/g,'');
-    if(/^\d+$/.test(processed)){
-      if(processed.startsWith('05')) processed = '+966'+processed.substring(1);
-      else if(processed.startsWith('5')) processed = '+966'+processed;
+// وظائف إنشاء ملفات Excel
+document.getElementById("createBtn").addEventListener("click", async ()=>{
+  const names=document.getElementById('names').value.trim();
+  const type=document.querySelector('input[name="creationType"]:checked').value;
+  const msg=document.getElementById('msg'); msg.textContent="";
+  if(!names){ msg.textContent=isArabic?"⚠️ الرجاء إدخال الأسماء أولاً":"⚠️ Please enter names first."; return; }
+  const list=names.split(/\n|,|،|;/).map(n=>n.trim()).filter(Boolean);
+  if(list.length===0){ msg.textContent=isArabic?"⚠️ لم يتم العثور على أسماء صالحة.":"⚠️ No valid names found."; return; }
+
+  const zip=new JSZip();
+  try{
+    for(const name of list){
+      const safeName=name.replace(/[<>:"/\\|?*]/g,"_");
+      if(type==="folder") zip.folder(safeName);
+      else{
+        const data=[[isArabic?"الاسم":"Name",isArabic?"تاريخ الإنشاء":"Creation Date"],[name,new Date().toLocaleString("ar-SA")]];
+        const ws=XLSX.utils.aoa_to_sheet(data);
+        const wb=XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb,ws,"Data");
+        if(type==="excel") zip.file(`${safeName}.xlsx`, XLSX.write(wb,{bookType:"xlsx",type:"array"}));
+        else if(type==="folderExcel") zip.folder(safeName).file(`${safeName}.xlsx`, XLSX.write(wb,{bookType:"xlsx",type:"array"}));
+      }
     }
-    const div = document.createElement('div');
-    div.textContent = processed;
-    div.classList.add('result-line');
-    resultBox.appendChild(div);
+    saveAs(await zip.generateAsync({type:"blob"}), isArabic?"folders_with_excel.zip":"folders_with_excel.zip");
+    msg.textContent=isArabic?`✅ تم إنشاء ${list.length} عنصر${list.length>1?"ات":""} وتحميلها بنجاح.`:`✅ Successfully created ${list.length} item${list.length>1?"s":""} and downloaded.`;
+    msg.style.color="green";
+  }catch(err){ console.error(err); msg.textContent=isArabic?"❌ حدث خطأ أثناء الإنشاء.":"❌ Error occurred while creating files."; msg.style.color="red"; }
+});
+
+// معالجة البيانات
+document.getElementById('processBtn').addEventListener('click',()=>{
+  const input=document.getElementById('inputWords').value.trim();
+  const resultBox=document.getElementById('resultBox'); resultBox.innerHTML='';
+  if(!input){ alert(isArabic?'الرجاء إدخال بيانات':'Please enter data'); return; }
+  input.split('\n').filter(Boolean).forEach(line=>{
+    let processed=line.trim().replace(/\s+/g,'');
+    if(/^\d+$/.test(processed)){
+      if(processed.startsWith('05')) processed='+966'+processed.substring(1);
+      else if(processed.startsWith('5')) processed='+966'+processed;
+    }
+    const div=document.createElement('div'); div.textContent=processed; div.classList.add('result-line'); resultBox.appendChild(div);
   });
-}
-
-function clearResults(){ document.getElementById('inputWords').value=''; document.getElementById('resultBox').innerHTML=''; }
-function exportToExcel(){ const resultBox=document.getElementById('resultBox'); const data=[]; resultBox.childNodes.forEach(node=>data.push([node.textContent])); const ws=XLSX.utils.aoa_to_sheet(data); const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Processed Data"); XLSX.writeFile(wb, "ProcessedData.xlsx"); }
-
-document.getElementById('processBtn').addEventListener('click', processInput);
-document.getElementById('clearBtn').addEventListener('click', clearResults);
-document.getElementById('exportBtn').addEventListener('click', exportToExcel);
+});
+document.getElementById('clearBtn').addEventListener('click',()=>{ document.getElementById('inputWords').value=''; document.getElementById('resultBox').innerHTML=''; });
+document.getElementById('exportBtn').addEventListener('click',()=>{
+  const data=[]; document.querySelectorAll('#resultBox .result-line').forEach(n=>data.push([n.textContent]));
+  const ws=XLSX.utils.aoa_to_sheet(data); const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'Processed Data'); XLSX.writeFile(wb,'ProcessedData.xlsx');
+});
 </script>
-
 </body>
 </html>
-
-
